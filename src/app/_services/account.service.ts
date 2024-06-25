@@ -27,8 +27,8 @@ export class AccountService {
     return this.http
       .post<any>(
         `${baseUrl}/login`,
-        { email, password },
-        { withCredentials: true }
+        { email, password }
+        // { withCredentials: true }
       )
       .pipe(
         map((account) => {
@@ -125,16 +125,15 @@ export class AccountService {
 
   private startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
-    const jwtBase64 = this.accountValue!.jwtToken!.split('.')[1];
-    const jwtToken = JSON.parse(atob(jwtBase64));
-
+    // const jwtBase64 = this.accountValue!.accessToken!.split('.')[1];
+    // const accessToken = JSON.parse(atob(jwtBase64));
     // set a timeout to refresh the token a minute before it expires
-    const expires = new Date(jwtToken.exp * 1000);
-    const timeout = expires.getTime() - Date.now() - 60 * 1000;
-    this.refreshTokenTimeout = setTimeout(
-      () => this.refreshToken().subscribe(),
-      timeout
-    );
+    // const expires = new Date(accessToken.exp * 1000);
+    // const timeout = expires.getTime() - Date.now() - 60 * 1000;
+    // this.refreshTokenTimeout = setTimeout(
+    //   () => this.refreshToken().subscribe(),
+    //   timeout
+    // );
   }
 
   private stopRefreshTokenTimer() {
