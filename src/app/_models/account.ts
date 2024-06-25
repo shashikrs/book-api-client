@@ -2,10 +2,10 @@
 
 export class Account {
   id?: string;
-  title?: string;
-  firstName?: string;
-  lastName?: string;
+  //   title?: string;
+  //   firstName?: string;
+  //   lastName?: string;
   email?: string;
-  role?: Role;
+  //  role?: Role;
   accessToken?: string;
 }
