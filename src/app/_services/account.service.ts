@@ -8,6 +8,7 @@ import { environment } from '@environments/environment';
 import { Account } from '@app/_models';
 
 const baseUrl = `${environment.apiUrl}/users`;
+const booksUrl = `${environment.apiUrl}/books`;
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -27,8 +28,8 @@ export class AccountService {
     return this.http
       .post<any>(
         `${baseUrl}/login`,
-        { email, password }
-        // { withCredentials: true }
+        { email, password },
+        { withCredentials: true }
       )
       .pipe(
         map((account) => {
@@ -124,19 +125,29 @@ export class AccountService {
   private refreshTokenTimeout?: any;
 
   private startRefreshTokenTimer() {
-    // parse json object from base64 encoded jwt token
-    // const jwtBase64 = this.accountValue!.accessToken!.split('.')[1];
-    // const accessToken = JSON.parse(atob(jwtBase64));
-    // set a timeout to refresh the token a minute before it expires
-    // const expires = new Date(accessToken.exp * 1000);
-    // const timeout = expires.getTime() - Date.now() - 60 * 1000;
-    // this.refreshTokenTimeout = setTimeout(
-    //   () => this.refreshToken().subscribe(),
-    //   timeout
-    // );
+    //parse json object from base64 encoded jwt token
+    const jwtBase64 = this.accountValue!.accessToken!.split('.')[1];
+    const accessToken = JSON.parse(atob(jwtBase64));
+
+    //set a timeout to refresh the token a minute before it expires
+    const expires = new Date(accessToken.iat * 1000);
+    const timeout = Math.abs(expires.getTime() - Date.now() - 60 * 1000);
+    this.refreshTokenTimeout = setTimeout(
+      () => this.refreshToken().subscribe(),
+      timeout
+    );
   }
 
   private stopRefreshTokenTimer() {
     clearTimeout(this.refreshTokenTimeout);
+  }
+
+  getBooks() {
+    return this.http.get<any>(`${booksUrl}`, { withCredentials: true }).pipe(
+      map((books) => {
+        console.log(books);
+        return books;
+      })
+    );
   }
 }
