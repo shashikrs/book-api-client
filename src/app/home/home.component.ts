@@ -1,17 +1,18 @@
 ﻿import { Component } from '@angular/core';
 
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 
 import { AccountService } from '@app/_services';
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  title: string;
+  author: string;
 }
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({
+  styleUrls: ['home.component.css'],
+  templateUrl: 'home.component.html',
+})
 export class HomeComponent {
   account = this.accountService.accountValue;
 
@@ -29,17 +30,17 @@ export class HomeComponent {
   //     private alertService: AlertService
   // ) { }
 
+  displayedColumns: string[] = ['title', 'author'];
+  dataSource = [];
+
   ngOnInit() {
-    this.accountService.getBooks().pipe().subscribe();
+    const result = this.accountService.getBooks().subscribe({
+      next: (response) => {
+        this.dataSource = response;
+      },
+      error: (err) => {
+        console.error('Error fetching data', err);
+      },
+    });
   }
-}
-@Component({
-  styleUrls: ['home.component.css'],
-  templateUrl: 'home.component.html',
-  standalone: true,
-  imports: [MatTableModule],
-})
-export class TableBasicExample {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  //dataSource = ELEMENT_DATA;
 }

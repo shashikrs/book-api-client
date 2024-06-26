@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, finalize } from 'rxjs/operators';
+import { map, finalize } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { Account } from '@app/_models';
@@ -143,11 +143,6 @@ export class AccountService {
   }
 
   getBooks() {
-    return this.http.get<any>(`${booksUrl}`, { withCredentials: true }).pipe(
-      map((books) => {
-        console.log(books);
-        return books;
-      })
-    );
+    return this.http.get<any>(`${booksUrl}`, { withCredentials: true }).pipe();
   }
 }

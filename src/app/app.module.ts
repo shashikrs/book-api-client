@@ -12,6 +12,7 @@ import { AccountService } from './_services';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { HomeComponent } from './home';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    MatTableModule,
   ],
   declarations: [AppComponent, AlertComponent, HomeComponent],
   providers: [
