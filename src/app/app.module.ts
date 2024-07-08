@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -21,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
     HttpClientModule,
     AppRoutingModule,
     MatTableModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   declarations: [AppComponent, AlertComponent, HomeComponent],
   providers: [

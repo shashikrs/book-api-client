@@ -1,3 +1,46 @@
 table {
   width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  /* row border */
+  border-bottom: 1px solid #ffa600;
+  font-weight: bold;
+}
+
+td .mat-cell {
+  /* row padding */
+  padding: 20px 0;
+  border: none;
+  background-color: aquamarine;
+}
+
+tr.mat-row {
+  /* row border */
+  border: 1px solid #ffa600;
+}
+
+td {
+  background-color: white;
+}
+
+tr {
+  background-color: rgb(231, 210, 183);
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.btn {
+  margin: 10px;
 }

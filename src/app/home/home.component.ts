@@ -30,7 +30,7 @@ export class HomeComponent {
   //     private alertService: AlertService
   // ) { }
 
-  displayedColumns: string[] = ['title', 'author'];
+  displayedColumns: string[] = ['title', 'author', 'action'];
   dataSource = [];
 
   ngOnInit() {
